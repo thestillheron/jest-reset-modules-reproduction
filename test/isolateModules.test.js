@@ -4,7 +4,7 @@ jest.mock("../src/authService")
 describe('Create order handler', () => {
     const mockedAuthService = jest.mocked(AuthService);
 
-    test('Returns 200 when all actions succeed', async () => {
+    test('Returns "success" when all actions succeed', async () => {
         mockedAuthService.mockImplementation(() => {
             return {
                 GetToken: () => Promise.resolve("a fake token")
@@ -14,11 +14,11 @@ describe('Create order handler', () => {
             const handler = require('../src/handler');
             const result = await handler();
 
-            expect(result.statusCode).toBe(200);
+            expect(result).toBe("success");
         });
     });
 
-    test('Returns 500 when any actions fail', async () => {
+    test('Returns "failure" when any actions fail', async () => {
         mockedAuthService.mockImplementation(() => {
             return {
                 GetToken: () => Promise.reject("something went wrong")
@@ -28,7 +28,7 @@ describe('Create order handler', () => {
             const handler = require('../src/handler');
             const result = await handler();
 
-            expect(result.statusCode).toBe(500);
+            expect(result).toBe("failure");
         });
     });
 });
