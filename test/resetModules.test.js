@@ -1,7 +1,7 @@
 const AuthService = require('../src/authService');
 jest.mock("../src/authService")
 
-describe('Handler', () => {
+describe('Reset Modules', () => {
     const mockedAuthService = jest.mocked(AuthService);
 
     test('Returns "success" when all actions succeed', async () => {
